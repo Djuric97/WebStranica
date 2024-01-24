@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Registracija</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/reg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff;
+        }
+
+
+        .navbar {
+            background-color: transparent;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+                .btn-custom {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-transparent {
+            background-color: #78713e;
+        }
+
+
+                .btn-custom {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-transparent {
+            background-color: #78713e;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <a href="/" class="btn btn-light btn-custom btn-transparent">Pocetna</a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/podrucje">Podrucje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/oruzje">Oruzje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/zivotinje">Zivotinje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vozila">Vozila</a>
+                </li>
+                {% if not session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Log In</a>
+                </li>
+                {% endif %}
+                {% if not session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/registracija">Registruj Se</a>
+                </li>
+                {% endif %}
+                {% if session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" style="color: red;" >Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/izmjena" style="color: #5171b5;" >Podesavanja</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+ <!-- Registracija temp. -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0" style="color: black;">Registracija</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/registracija">
+                        <div class="form-group">
+                            <label for="korisnicko" style="color: black;">Korisnicko ime</label>
+                            <input type="text" class="form-control" id="korisnicko" name="korisnicko" placeholder="Unesi korisnicko ime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ime" style="color: black;">Ime</label>
+                            <input type="text" class="form-control" id="ime" name="ime" placeholder="Unesi ime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prezime" style="color: black;">Prezime</label>
+                            <input type="text" class="form-control" id="prezime" name="prezime" placeholder="Unesi prezime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" style="color: black;">Email adresa</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Unesi email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sifra" style="color: black;">Sifra</label>
+                            <input type="password" class="form-control" id="sifra" name="sifra" placeholder="Unesi sifru" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="potvrdaSifre" style="color: black;">Potvrdi sifru</label>
+                            <input type="password" class="form-control" id="potvrdaSifre" name="potvrdaSifre" placeholder="Potvrdi sifru" required>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-block btn-success">Registruj se!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+

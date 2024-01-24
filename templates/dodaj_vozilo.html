@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Vozila</title>
+
+          <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/off.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: transparent;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-text {
+            color: #000;
+        }
+        .card-title {
+            color: #000;
+        }
+
+
+        #model {
+        height: 40px; /* Adjust the height as needed */
+        width: 600px; /* Adjust the width as needed */
+       }
+
+        #opis {
+        height: 150px; /* Adjust the height as needed */
+        width: 600px; /* Adjust the width as needed */
+       }
+
+
+       #slika {
+      width: 600px;
+       }
+
+      .custom-file-label {
+      width: 600px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+
+        .btn-custom {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-transparent {
+            background-color: #78713e;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <a href="/" class="btn btn-light btn-custom btn-transparent">Pocetna</a>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/podrucje">Podrucje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/oruzje">Oruzje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/zivotinje">Zivotinje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vozila">Vozila</a>
+                </li>
+                {% if not session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Log In</a>
+                </li>
+                {% endif %}
+                {% if not session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/registracija">Registruj Se</a>
+                </li>
+                {% endif %}
+                {% if session.get('korisnicko') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" style="color: red;" >Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/izmjena" style="color: #5171b5;" >Podesavanja</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Polje za dodavanje -->
+
+<div class="container mt-5">
+    <form method="post" action="/dodaj_vozilo">
+        <div class="form-group">
+            <label for="model">Model vozila:</label>
+            <input type="text" class="form-control" id="model" name="model"  placeholder="Model vozila">
+        </div>
+
+        <div class="form-group">
+            <label for="opis">Opis vozila:</label>
+             <input type="text" class="form-control form-control-lg" id="opis" name="opis" placeholder="Opis vozila:">
+        </div>
+
+        <div class="form-group">
+            <label for="slika">Odaberi sliku:</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="slika" name="slika"  aria-describedby="fileHelp">
+            <label class="custom-file-label" for="slika">Odaberi sliku</label>
+        </div>
+            <small id="fileHelp" class="form-text text-muted">Please select a file to search.</small>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
