@@ -3,6 +3,8 @@ import flask_bootstrap
 import flask
 from flask_mysqldb import MySQL
 import yaml
+import hashlib
+
 
 
 aplikacija = Flask(__name__)
@@ -149,7 +151,8 @@ def login():
             kurzor = mysql.connection.cursor()
             kor_ime = request.form.get('korisnicko')
             pword = request.form.get('sifra')
-            if kurzor.execute('SELECT * FROM admin WHERE korisnicko = %s AND sifra = %s', [kor_ime, pword]) > 0:
+            s = hashlib.sha256(pword.encode('ascii')).hexdigest()
+            if kurzor.execute('SELECT * FROM admin WHERE korisnicko = %s AND sifra = %s', [kor_ime, s]) > 0:
                 admin = kurzor.fetchone()
                 session['ulogovan'] = True
                 session['korisnicko'] = admin[1]
@@ -176,9 +179,10 @@ def registracija():
         sifra = request.form.get('sifra')
         potvrda_sifre = request.form.get('potvrdaSifre')
         if sifra == potvrda_sifre:
+            s = hashlib.sha256(sifra.encode('ascii')).hexdigest()
             if kurzor.execute('SELECT * FROM admin WHERE email = %s', [email]) == 0:
                 kurzor.execute("INSERT INTO admin (korisnicko, ime, prezime, email, sifra) VALUES (%s, %s, %s, %s, %s)",
-                                [korisnicko, ime, prezime, email, sifra])
+                                [korisnicko, ime, prezime, email, s])
                 mysql.connection.commit()
                 kurzor.close()
                 return redirect(url_for('pocetna'))
