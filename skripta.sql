@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `lov_stranica`.`admin` (
   `ime` VARCHAR(45) NOT NULL,
   `prezime` VARCHAR(45) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
-  `sifra` VARCHAR(45) NOT NULL,
+  `sifra` VARCHAR(512) NOT NULL,
   `aktivan` TINYINT(1) NULL DEFAULT '0',
   PRIMARY KEY (`id_admin`))
 ENGINE = InnoDB
